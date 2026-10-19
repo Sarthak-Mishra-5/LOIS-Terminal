@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply bg-terminal-bg text-terminal-text font-mono;
+    font-size: 12px;
+    min-height: 100%;
+  }
+  body {
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Thin dark scrollbars that match the background. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.terminal.border') theme('colors.terminal.bg');
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: theme('colors.terminal.bg');
+  }
+  *::-webkit-scrollbar-thumb {
+    background: theme('colors.terminal.border');
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .label {
+    @apply uppercase font-bold tracking-[0.05em];
+  }
+  .ctl {
+    @apply text-[10px] font-bold uppercase px-[7px] py-[2px] rounded-control border border-terminal-border bg-transparent text-terminal-muted hover:text-terminal-text cursor-pointer select-none;
+  }
+  .ctl-active {
+    @apply bg-terminal-active border-terminal-activeBorder text-terminal-text;
+  }
+  .live-dot {
+    @apply inline-block w-[7px] h-[7px] rounded-full bg-terminal-up;
+    box-shadow: 0 0 6px 1px rgba(0, 255, 136, 0.7);
+  }
+  .dead-dot {
+    @apply inline-block w-[7px] h-[7px] rounded-full bg-terminal-down;
+  }
+  .grid-table th {
+    @apply text-terminal-muted font-bold uppercase text-[10px] tracking-[0.05em] text-right px-2 py-1 border-b border-terminal-border bg-terminal-raised sticky top-0;
+  }
+  .grid-table th:first-child,
+  .grid-table td:first-child {
+    @apply text-left;
+  }
+  .grid-table td {
+    @apply text-right px-2 py-[3px] border-b border-terminal-border num whitespace-nowrap;
+  }
+}
